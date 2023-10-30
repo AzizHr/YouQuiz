@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstname;
     private String lastname;
