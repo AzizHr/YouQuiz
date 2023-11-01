@@ -1,6 +1,7 @@
 package com.quiz.api.controllers;
 
 import com.quiz.api.models.Level;
+import com.quiz.api.models.Subject;
 import com.quiz.api.services.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class LevelController {
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         levelService.delete(id);
         return ResponseEntity.ok("Level with ID " + id + " has been deleted.");
+    }
+
+    @GetMapping("/{id}")
+    public Level getByID(@PathVariable Integer id) {
+        return levelService.getLevelByID(id);
     }
 
 }
