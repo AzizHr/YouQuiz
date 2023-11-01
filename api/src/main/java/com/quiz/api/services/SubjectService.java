@@ -20,4 +20,8 @@ public class SubjectService {
     public Subject save(Subject subject) {
         return subjectRepository.save(subject);
     }
+
+    public void delete(Integer id) {
+        subjectRepository.deleteById(id);
+    }
 }
