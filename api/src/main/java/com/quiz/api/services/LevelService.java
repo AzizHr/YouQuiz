@@ -19,4 +19,8 @@ public class LevelService {
         return levelRepository.save(level);
     }
 
+    public void delete(Integer id) {
+        levelRepository.deleteById(id);
+    }
+
 }
