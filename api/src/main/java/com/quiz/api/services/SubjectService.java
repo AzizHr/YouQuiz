@@ -5,7 +5,7 @@ import com.quiz.api.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectService {
@@ -23,5 +23,9 @@ public class SubjectService {
 
     public void delete(Integer id) {
         subjectRepository.deleteById(id);
+    }
+
+    public Subject getSubjectByID(Integer id) {
+        return subjectRepository.findById(id).orElse(null);
     }
 }

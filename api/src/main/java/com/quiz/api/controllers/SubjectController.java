@@ -30,4 +30,9 @@ public class SubjectController {
         subjectService.delete(id);
         return ResponseEntity.ok("Subject with ID " + id + " has been deleted.");
     }
+
+    @GetMapping("/{id}")
+    public Subject getByID(@PathVariable Integer id) {
+        return subjectService.getSubjectByID(id);
+    }
 }
