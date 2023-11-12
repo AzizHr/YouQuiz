@@ -16,16 +16,14 @@ public class StudentService {
     public StudentService(StudentRepository repository) {
         studentRepository = repository;
     }
-
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }
-
     public Student save(Student student) {
         return studentRepository.save(student);
     }
-
     public void delete(Integer id) {
         studentRepository.deleteById(id);
     }
+
 }
