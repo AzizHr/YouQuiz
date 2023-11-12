@@ -41,4 +41,9 @@ public class SubjectController {
 
         return subjectService.getSubjectByID(id);
     }
+
+    @GetMapping()
+    public List<Subject> subjects() {
+        return subjectService.findAll();
+    }
 }

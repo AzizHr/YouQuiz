@@ -40,4 +40,8 @@ public class SubjectService {
         return subjectRepository.save(subject1);
 
     }
+
+    public List<Subject> findAll() {
+        return subjectRepository.findAll();
+    }
 }
