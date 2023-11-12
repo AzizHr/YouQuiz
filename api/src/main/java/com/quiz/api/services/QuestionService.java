@@ -43,6 +43,10 @@ public class QuestionService {
         return questionRepository.save(question1);
     }
 
+    public List<Question> questionsByLevelId(Integer levelId) {
+        return questionRepository.findAllByLevelId(levelId);
+    }
+
     public List<Question> questionsBySubjectId(Integer subjectId) {
         return questionRepository.findAllBySubjectId(subjectId);
     }
