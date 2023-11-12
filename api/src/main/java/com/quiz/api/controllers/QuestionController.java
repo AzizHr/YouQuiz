@@ -1,6 +1,7 @@
 package com.quiz.api.controllers;
 
 import com.quiz.api.models.Question;
+import com.quiz.api.models.Subject;
 import com.quiz.api.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,11 @@ public class QuestionController {
     @PostMapping()
     public Question save(@RequestBody Question question) {
         return questionService.save(question);
+    }
+
+    @PutMapping
+    public Question update(@RequestBody Question question) {
+        return questionService.update(question);
     }
 
     @DeleteMapping("/{id}")
