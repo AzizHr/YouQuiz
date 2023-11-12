@@ -1,6 +1,6 @@
 package com.quiz.api.models;
 
-import enums.ResponseType;
+import com.quiz.api.enums.ResponseType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,10 +20,10 @@ public class Question {
     private ResponseType type;
     private Integer points;
     @ManyToOne
-    @JoinColumn(name = "level_id")
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
     private Level level;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
 }

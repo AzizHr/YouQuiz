@@ -1,4 +1,4 @@
-package enums;
+package com.quiz.api.enums;
 
 public enum ResponseType {
 
