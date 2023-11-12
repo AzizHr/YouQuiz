@@ -6,6 +6,8 @@ import com.quiz.api.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionService {
 
@@ -40,4 +42,9 @@ public class QuestionService {
 
         return questionRepository.save(question1);
     }
+
+    public List<Question> questionsBySubjectId(Integer subjectId) {
+        return questionRepository.findAllBySubjectId(subjectId);
+    }
+
 }
