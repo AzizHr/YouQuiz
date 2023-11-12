@@ -30,4 +30,12 @@ public class LevelService {
         return levelRepository.findById(id).orElse(null);
     }
 
+    public Level update(Level level) {
+        Level level1 = getLevelByID(level.getId());
+        level1.setDescription(level.getDescription());
+        level1.setMaxPoints(level.getMaxPoints());
+        level1.setMinPoints(level.getMinPoints());
+
+        return levelRepository.save(level1);
+    }
 }

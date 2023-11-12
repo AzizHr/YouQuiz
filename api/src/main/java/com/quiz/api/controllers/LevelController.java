@@ -26,6 +26,11 @@ public class LevelController {
         return levelService.save(level);
     }
 
+    @PutMapping
+    public Level update(@RequestBody Level level) {
+        return levelService.update(level);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         levelService.delete(id);
