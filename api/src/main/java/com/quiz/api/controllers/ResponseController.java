@@ -27,4 +27,9 @@ public class ResponseController {
         responseService.delete(id);
     }
 
+    @GetMapping("/{id}")
+    public Response getResponse(@PathVariable Integer id) {
+        return responseService.findById(id);
+    }
+
 }

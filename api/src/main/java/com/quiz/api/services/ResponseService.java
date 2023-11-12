@@ -22,4 +22,8 @@ public class ResponseService {
     public void delete(Integer id) {
         responseRepository.deleteById(id);
     }
+
+    public Response findById(Integer id) {
+        return responseRepository.findById(id).orElse(null);
+    }
 }
