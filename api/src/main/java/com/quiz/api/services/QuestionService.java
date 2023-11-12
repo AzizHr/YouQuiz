@@ -47,4 +47,7 @@ public class QuestionService {
         return questionRepository.findAllBySubjectId(subjectId);
     }
 
+    public List<Question> findAll() {
+        return questionRepository.findAll();
+    }
 }

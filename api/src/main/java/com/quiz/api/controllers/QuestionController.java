@@ -1,10 +1,13 @@
 package com.quiz.api.controllers;
 
+import com.quiz.api.models.Level;
 import com.quiz.api.models.Question;
 import com.quiz.api.models.Subject;
 import com.quiz.api.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -37,4 +40,8 @@ public class QuestionController {
         return questionService.findById(id);
     }
 
+    @GetMapping()
+    public List<Question> questions() {
+        return questionService.findAll();
+    }
 }
