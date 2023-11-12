@@ -22,6 +22,11 @@ public class ResponseController {
         return responseService.save(response);
     }
 
+    @PutMapping
+    public Response update(@RequestBody Response response) {
+        return responseService.update(response);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         responseService.delete(id);
