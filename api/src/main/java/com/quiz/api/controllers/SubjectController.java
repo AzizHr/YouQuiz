@@ -25,6 +25,11 @@ public class SubjectController {
         return subjectService.save(subject);
     }
 
+    @PutMapping
+    public Subject update(@RequestBody Subject subject) {
+        return subjectService.update(subject);
+    }
+
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         subjectService.delete(id);

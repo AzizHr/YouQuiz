@@ -30,4 +30,14 @@ public class SubjectService {
     public Subject getSubjectByID(Integer id) {
         return subjectRepository.findById(id).orElse(null);
     }
+
+    public Subject update(Subject subject) {
+
+        Subject subject1 = getSubjectByID(subject.getId());
+        subject1.setTitle(subject.getTitle());
+        subject1.setParent(subject.getParent());
+
+        return subjectRepository.save(subject1);
+
+    }
 }
