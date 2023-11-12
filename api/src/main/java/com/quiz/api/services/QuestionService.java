@@ -23,4 +23,7 @@ public class QuestionService {
         questionRepository.deleteById(id);
     }
 
+    public Question findById(Integer id) {
+        return questionRepository.findById(id).orElse(null);
+    }
 }

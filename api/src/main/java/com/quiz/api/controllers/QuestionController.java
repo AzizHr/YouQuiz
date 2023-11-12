@@ -26,4 +26,9 @@ public class QuestionController {
         questionService.delete(id);
     }
 
+    @GetMapping("/{id}")
+    public Question getQuestion(@PathVariable Integer id) {
+        return questionService.findById(id);
+    }
+
 }
