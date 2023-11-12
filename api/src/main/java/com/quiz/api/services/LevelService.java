@@ -38,4 +38,8 @@ public class LevelService {
 
         return levelRepository.save(level1);
     }
+
+    public List<Level> findAll() {
+        return levelRepository.findAll();
+    }
 }

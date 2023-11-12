@@ -54,4 +54,9 @@ public class LevelController {
 
     }
 
+    @GetMapping()
+    public List<Level> levels() {
+        return levelService.findAll();
+    }
+
 }
