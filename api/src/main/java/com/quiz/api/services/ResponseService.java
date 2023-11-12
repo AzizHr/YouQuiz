@@ -19,4 +19,7 @@ public class ResponseService {
         return responseRepository.save(response);
     }
 
+    public void delete(Integer id) {
+        responseRepository.deleteById(id);
+    }
 }
