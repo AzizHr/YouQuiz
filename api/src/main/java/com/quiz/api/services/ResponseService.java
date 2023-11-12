@@ -6,6 +6,8 @@ import com.quiz.api.repositories.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResponseService {
 
@@ -33,5 +35,9 @@ public class ResponseService {
         response1.setContent(response.getContent());
 
         return responseRepository.save(response1);
+    }
+
+    public List<Response> findAll() {
+        return responseRepository.findAll();
     }
 }

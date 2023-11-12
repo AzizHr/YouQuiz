@@ -2,9 +2,12 @@ package com.quiz.api.controllers;
 
 import com.quiz.api.models.Question;
 import com.quiz.api.models.Response;
+import com.quiz.api.models.Subject;
 import com.quiz.api.services.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/responses")
@@ -35,6 +38,11 @@ public class ResponseController {
     @GetMapping("/{id}")
     public Response getResponse(@PathVariable Integer id) {
         return responseService.findById(id);
+    }
+
+    @GetMapping()
+    public List<Response> responses() {
+        return responseService.findAll();
     }
 
 }
