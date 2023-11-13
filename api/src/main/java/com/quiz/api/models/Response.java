@@ -12,7 +12,7 @@ import java.util.List;
 public class Response {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
     private String content;
 

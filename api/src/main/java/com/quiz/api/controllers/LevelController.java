@@ -48,10 +48,9 @@ public class LevelController {
     }
 
     @GetMapping("/{id}/questions")
-    public List<Question> getQuestionsByID(@PathVariable Integer id) {
+    public List<Question> getQuestionsByLevelId(@PathVariable Integer id) {
 
-        return questionService.questionsBySubjectId(id);
-
+        return questionService.questionsByLevelId(id);
     }
 
     @GetMapping()

@@ -1,8 +1,6 @@
 package com.quiz.api.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,21 +11,21 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table
-public class Subject  {
+public class Subject implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
+
     private String title;
-//    @JsonIgnore
+
     @ManyToOne
-    @JoinColumn(name = "parent_id",referencedColumnName = "id")
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Subject parent;
-//    @JsonIgnore
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "parent")
     private List<Subject> children = new ArrayList<>();
-//    @JsonIgnore
+
     @OneToMany(mappedBy = "subject")
     private List<Question> questions;
 }

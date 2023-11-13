@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Validation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
     private Integer points;
     @ManyToOne
