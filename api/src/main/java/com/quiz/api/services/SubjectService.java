@@ -28,7 +28,10 @@ public class SubjectService {
     }
 
     public Subject getSubjectByID(Integer id) {
-        return subjectRepository.findById(id).orElse(null);
+        Subject subject = subjectRepository.findById(id).orElse(null);
+//        List<Subject> children = subjectRepository.findAllByParentId(subject.getId());
+//        subject.setChildren(children);
+        return subject;
     }
 
     public Subject update(Subject subject) {
@@ -42,6 +45,10 @@ public class SubjectService {
     }
 
     public List<Subject> findAll() {
+
         return subjectRepository.findAll();
     }
+
+
+
 }

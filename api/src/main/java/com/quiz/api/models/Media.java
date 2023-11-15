@@ -1,17 +1,19 @@
 package com.quiz.api.models;
 
+import com.quiz.api.enums.MediaType;
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@Data
 @Entity
-@Inheritance
-public class Student extends User {
+public class Media {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDate registeredAt;
+    @Enumerated(EnumType.STRING)
+    private MediaType type;
 
 }

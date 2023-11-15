@@ -1,17 +1,18 @@
 package com.quiz.api.models;
 
+import com.quiz.api.enums.SpecialityType;
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity
 @Inheritance
-public class Student extends User {
+public class Trainer extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDate registeredAt;
+    private SpecialityType speciality;
 
 }

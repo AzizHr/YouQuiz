@@ -6,6 +6,7 @@ import com.quiz.api.services.QuestionService;
 import com.quiz.api.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("/{id}")
+
     public String delete(@PathVariable Integer id) {
         subjectService.delete(id);
         return "Subject with ID " + id + " has been deleted.";
@@ -46,7 +48,8 @@ public class SubjectController {
         return subjectService.getSubjectByID(id);
     }
 
-    @GetMapping()
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public List<Subject> subjects() {
         return subjectService.findAll();
     }
