@@ -35,6 +35,4 @@ public class Question {
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
-    @ManyToMany(mappedBy = "questions")
-    private List<Quiz> quizzes;
 }

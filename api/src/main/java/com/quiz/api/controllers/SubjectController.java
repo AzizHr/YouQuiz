@@ -1,5 +1,6 @@
 package com.quiz.api.controllers;
 
+import com.quiz.api.dtos.SubjectDTO;
 import com.quiz.api.models.Question;
 import com.quiz.api.models.Subject;
 import com.quiz.api.services.QuestionService;
@@ -10,7 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/subjects")
@@ -26,8 +30,15 @@ public class SubjectController {
     }
 
     @PostMapping
-    public Subject save(@RequestBody Subject subject) {
-        return subjectService.save(subject);
+    public ResponseEntity<Map<String, Object>> save(@RequestBody SubjectDTO subjectDTO) throws Exception {
+        Map<String, Object> message = new HashMap<>();
+        try{
+            message.put("message", "subject created");
+            message.put("subject", subjectService.save(subjectDTO));
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }catch(Exception e){
+            throw new Exception("cannot create a new subject");
+        }
     }
 
     @PutMapping
@@ -48,10 +59,20 @@ public class SubjectController {
         return subjectService.getSubjectByID(id);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<Subject> subjects() {
-        return subjectService.findAll();
+    @GetMapping()
+    public ResponseEntity<Map<String, Object>> subjects() throws Exception {
+        Map<String, Object> message = new HashMap<>();
+        try{
+            if(subjectService.findAll().isEmpty()) {
+                message.put("message", "No subjects found!");
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            }
+            message.put("message", "subjects found");
+            message.put("subjects", subjectService.findAll());
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }catch(Exception e){
+            throw new Exception("cannot find any subject");
+        }
     }
 
     @GetMapping("/{id}/questions")

@@ -1,11 +1,17 @@
 package com.quiz.api.dtos;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 public class SubjectResponseDTO {
 
+    private long id;
     private String title;
-    private SubjectDTO parent;
+    private SubjectResponseDTO parent;
     private List<SubjectDTO> children;
 
 }

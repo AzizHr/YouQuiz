@@ -2,17 +2,17 @@ package com.quiz.api.dtos;
 
 import com.quiz.api.enums.ResponseType;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class QuestionDTO {
+public class QuestionResponseDTO {
 
     private Integer numberOfResponses;
     private Integer numberOfCorrectResponses;
     private String content;
+    private ResponseType type;
     private Integer points;
-    private Integer levelId;
-    private Integer subjectId;
+    private LevelDTO level;
+    private SubjectDTO subject;
+
 
 }

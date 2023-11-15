@@ -1,8 +1,10 @@
 package com.quiz.api.controllers;
 
+import com.quiz.api.dtos.QuestionDTO;
 import com.quiz.api.models.Level;
 import com.quiz.api.models.Question;
 import com.quiz.api.models.Subject;
+import com.quiz.api.repositories.QuestionRepository;
 import com.quiz.api.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,15 +28,15 @@ public class QuestionController {
     }
 
     @PostMapping()
-    public ResponseEntity<Map<String, Object>> save(@RequestBody Question question) {
-        Map<String, Object> result = new HashMap<>();
-        try {
-            result.put("question", questionService.save(question));
-            result.put("message", "Question added with success!");
-            return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } catch (Exception e) {
-            result.put("message", e.getMessage());
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, Object>> save(@RequestBody QuestionDTO questionDTO) throws Exception {
+
+        Map<String, Object> message = new HashMap<>();
+        try{
+            message.put("message", "question created");
+            message.put("subject", questionService.save(questionDTO));
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }catch(Exception e){
+            throw new Exception("cannot create a new question");
         }
 
     }
@@ -43,7 +45,7 @@ public class QuestionController {
     public  ResponseEntity<Map<String, Object>> update(@RequestBody Question question) {
         Map<String, Object> result = new HashMap<>();
         try {
-            result.put("question", questionService.save(question));
+            result.put("question", questionService.update(question));
             result.put("message", "Question updated with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -82,18 +84,18 @@ public class QuestionController {
     }
 
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> questions() {
-        Map<String, Object> result = new HashMap<>();
-        try {
-            if(questionService.findAll() == null) {
-                result.put("message", "No questions found!");
-                return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, Object>> questions() throws Exception {
+        Map<String, Object> message = new HashMap<>();
+        try{
+            if(questionService.findAll().isEmpty()) {
+                message.put("message", "No questions found!");
+                return new ResponseEntity<>(message, HttpStatus.OK);
             }
-            result.put("questions", questionService.findAll());
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception e) {
-            result.put("message", e.getMessage());
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            message.put("message", "subjects found");
+            message.put("subjects", questionService.findAll());
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }catch(Exception e){
+            throw new Exception("cannot find any question");
         }
     }
 }

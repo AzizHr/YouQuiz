@@ -5,10 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class SubjectDTO {
+public class LevelDTO {
 
     private Integer id;
-    private String title;
-    private Integer parentId;
+    private String description;
+    private Integer maxPoints;
+    private Integer minPoints;
 
 }
