@@ -1,45 +1,51 @@
 package com.quiz.api.services;
 
+import com.quiz.api.dtos.levelDTO.LevelDTO;
+import com.quiz.api.dtos.levelDTO.LevelResponseDTO;
+import com.quiz.api.dtos.subjectDTO.SubjectResponseDTO;
 import com.quiz.api.models.Level;
 import com.quiz.api.models.Subject;
 import com.quiz.api.repositories.LevelRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class LevelService {
 
     private final LevelRepository levelRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public LevelService(LevelRepository repository) {
+    public LevelService(LevelRepository repository, ModelMapper modelMapper) {
         levelRepository = repository;
+        this.modelMapper = modelMapper;
     }
 
-    public Level save(Level level) {
-        return levelRepository.save(level);
+    public LevelResponseDTO save(LevelDTO levelDTO) {
+        Level level = modelMapper.map(levelDTO, Level.class);
+        return modelMapper.map(levelRepository.save(level), LevelResponseDTO.class);
     }
 
     public void delete(Integer id) {
         levelRepository.deleteById(id);
     }
 
-    public Level getLevelByID(Integer id) {
-        return levelRepository.findById(id).orElse(null);
+    public LevelResponseDTO getLevelByID(Integer id) {
+        Level level = modelMapper.map(levelRepository.findById(id).get(), Level.class);
+        return modelMapper.map(level, LevelResponseDTO.class);
     }
 
-    public Level update(Level level) {
-        Level level1 = getLevelByID(level.getId());
-        level1.setDescription(level.getDescription());
-        level1.setMaxPoints(level.getMaxPoints());
-        level1.setMinPoints(level.getMinPoints());
-
-        return levelRepository.save(level1);
+    public LevelResponseDTO update(LevelDTO levelDTO) {
+        Level level = modelMapper.map(levelDTO, Level.class);
+        return modelMapper.map(levelRepository.save(level), LevelResponseDTO.class);
     }
 
-    public List<Level> findAll() {
-        return levelRepository.findAll();
+    public List<LevelResponseDTO> findAll() {
+        return Arrays.asList(modelMapper.map(levelRepository.findAll(), LevelResponseDTO[].class));
+
     }
 }

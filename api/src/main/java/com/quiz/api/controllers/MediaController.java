@@ -1,6 +1,8 @@
 package com.quiz.api.controllers;
 
+import com.quiz.api.dtos.mediaDTO.MediaDTO;
 import com.quiz.api.dtos.questionDTO.QuestionDTO;
+import com.quiz.api.services.MediaService;
 import com.quiz.api.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,37 +13,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/questions")
-public class QuestionController {
+@RequestMapping("/api/medias")
+public class MediaController {
 
-    private final QuestionService questionService;
+    private final MediaService mediaService;
 
     @Autowired
-    public QuestionController(QuestionService service) {
-        questionService = service;
+    public MediaController(MediaService mediaService) {
+        this.mediaService = mediaService;
     }
 
     @PostMapping()
-    public ResponseEntity<Map<String, Object>> save(@RequestBody QuestionDTO questionDTO) throws Exception {
+    public ResponseEntity<Map<String, Object>> save(@RequestBody MediaDTO mediaDTO) throws Exception {
 
         Map<String, Object> message = new HashMap<>();
         try{
-            message.put("message", "question created");
-            message.put("subject", questionService.save(questionDTO));
+            message.put("message", "media created");
+            message.put("media", mediaService.save(mediaDTO));
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         }catch(Exception e){
-            message.put("subject", e.getMessage());
+            message.put("message", e.getMessage());
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
     }
 
     @PutMapping
-    public  ResponseEntity<Map<String, Object>> update(@RequestBody QuestionDTO questionDTO) {
+    public  ResponseEntity<Map<String, Object>> update(@RequestBody MediaDTO mediaDTO) {
         Map<String, Object> result = new HashMap<>();
         try {
-            result.put("question", questionService.update(questionDTO));
-            result.put("message", "Question updated with success!");
+            result.put("media", mediaService.update(mediaDTO));
+            result.put("message", "Media updated with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -53,8 +55,8 @@ public class QuestionController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            questionService.delete(id);
-            result.put("message", "Question deleted with success!");
+            mediaService.delete(id);
+            result.put("message", "Media deleted with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -66,11 +68,11 @@ public class QuestionController {
     public ResponseEntity<Map<String, Object>> getQuestion(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            if(questionService.findById(id) == null) {
-                result.put("message", "Question with id "+id+" not found!");
+            if(mediaService.getMediaById(id) == null) {
+                result.put("message", "Media with id "+id+" not found!");
                 return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
             }
-            result.put("question", questionService.findById(id));
+            result.put("media", mediaService.getMediaById(id));
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -82,15 +84,16 @@ public class QuestionController {
     public ResponseEntity<Map<String, Object>> questions() throws Exception {
         Map<String, Object> message = new HashMap<>();
         try{
-            if(questionService.findAll().isEmpty()) {
-                message.put("message", "No questions found!");
+            if(mediaService.findAll().isEmpty()) {
+                message.put("message", "No medias found!");
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
-            message.put("message", "subjects found");
-            message.put("subjects", questionService.findAll());
+            message.put("message", "medias found");
+            message.put("medias", mediaService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any question");
+            throw new Exception("cannot find any media");
         }
     }
 }
+
