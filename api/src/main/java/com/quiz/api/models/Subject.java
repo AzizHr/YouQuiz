@@ -21,7 +21,7 @@ public class Subject {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Subject> children;
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
 

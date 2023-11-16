@@ -15,5 +15,9 @@ public class Media {
     private Integer id;
     @Enumerated(EnumType.STRING)
     private MediaType type;
+    private String url;
+    @ManyToOne
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private Question question;
 
 }

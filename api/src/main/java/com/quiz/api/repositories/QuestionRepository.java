@@ -12,5 +12,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     @Query("SELECT Q FROM Question Q WHERE Q.subject.id = :subjectId")
     List<Question> findAllBySubjectId(Integer subjectId);
 
+    @Query("SELECT Q FROM Question Q WHERE Q.level.id = :levelId")
     List<Question> findAllByLevelId(Integer levelId);
 }

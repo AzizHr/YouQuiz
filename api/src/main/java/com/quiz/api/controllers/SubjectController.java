@@ -1,20 +1,15 @@
 package com.quiz.api.controllers;
 
-import com.quiz.api.dtos.SubjectDTO;
-import com.quiz.api.models.Question;
-import com.quiz.api.models.Subject;
+import com.quiz.api.dtos.subjectDTO.SubjectDTO;
 import com.quiz.api.services.QuestionService;
 import com.quiz.api.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/subjects")
@@ -42,8 +37,15 @@ public class SubjectController {
     }
 
     @PutMapping
-    public Subject update(@RequestBody Subject subject) {
-        return subjectService.update(subject);
+    public ResponseEntity<Map<String, Object>> update(@RequestBody SubjectDTO subjectDTO) throws Exception {
+        Map<String, Object> message = new HashMap<>();
+        try{
+            message.put("message", "subject updated");
+            message.put("subject", subjectService.update(subjectDTO));
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }catch(Exception e){
+            throw new Exception("cannot update this subject");
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -54,9 +56,17 @@ public class SubjectController {
     }
 
     @GetMapping("/{id}")
-    public Subject getByID(@PathVariable Integer id) {
+    public  ResponseEntity<Map<String, Object>> subject(@PathVariable Integer id) throws Exception {
 
-        return subjectService.getSubjectByID(id);
+        Map<String, Object> message = new HashMap<>();
+
+        try{
+            message.put("message", "subjects found");
+            message.put("subject", subjectService.getSubjectByID(id));
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }catch(Exception e){
+            throw new Exception("cannot find any subject");
+        }
     }
 
     @GetMapping()
@@ -76,9 +86,21 @@ public class SubjectController {
     }
 
     @GetMapping("/{id}/questions")
-    public List<Question> getQuestionsByID(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> getQuestionsByID(@PathVariable Integer id) throws Exception {
 
-        return questionService.questionsBySubjectId(id);
+        Map<String, Object> message = new HashMap<>();
+
+        try{
+            if(questionService.questionsBySubjectId(id).isEmpty()) {
+                message.put("message", "No questions found for this subject!");
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            }
+            message.put("message", "questions found");
+            message.put("questions", questionService.questionsByLevelId(id));
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }catch(Exception e){
+            throw new Exception("cannot find any question");
+        }
 
     }
 }

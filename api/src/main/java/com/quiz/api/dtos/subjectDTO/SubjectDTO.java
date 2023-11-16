@@ -1,4 +1,4 @@
-package com.quiz.api.dtos;
+package com.quiz.api.dtos.subjectDTO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

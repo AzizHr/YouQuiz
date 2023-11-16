@@ -35,4 +35,10 @@ public class Question {
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Validation> validations;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Media> medias;
+
 }
