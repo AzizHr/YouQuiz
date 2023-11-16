@@ -12,7 +12,7 @@ import java.util.List;
 public class Level {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
     private Integer maxPoints;

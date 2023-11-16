@@ -1,31 +1,28 @@
 package com.quiz.api.models;
 
-import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
 @Entity
-public class Subject implements Serializable {
+public class Subject {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String title;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Subject parent;
 
-    @OneToMany(mappedBy = "parent")
-    private List<Subject> children = new ArrayList<>();
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Subject> children;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
+
+
 }

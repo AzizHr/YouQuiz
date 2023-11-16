@@ -1,9 +1,10 @@
 package com.quiz.api.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quiz.api.enums.ResponseType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -12,7 +13,7 @@ import lombok.*;
 public class Question {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Integer numberOfResponses;
@@ -33,4 +34,11 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Validation> validations;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Media> medias;
+
 }
