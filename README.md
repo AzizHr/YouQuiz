@@ -9,12 +9,40 @@
   GET /api/subjects
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `id` | `int` | subject id |
-| `title` | `string` | subject title |
-| `parent` | `Subject` | subject parent |
-| `children` | `Subject[]` | subject children |
+**Result**
+```json
+    "subjects": [
+        {
+            "id": 1,
+            "title": "sub1",
+            "parent": null,
+            "children": [
+                {
+                    "id": 3,
+                    "title": "sub2",
+                    "parentId": 1
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "sub2",
+            "parent": {
+                "id": 1,
+                "title": "sub1",
+                "parent": null,
+                "children": [
+                    {
+                        "id": 3,
+                        "title": "sub2",
+                        "parentId": 1
+                    }
+                ]
+            },
+            "children": []
+        }
+    ]
+```
 
 #### Get one subject
 
