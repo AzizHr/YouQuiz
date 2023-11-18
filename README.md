@@ -5,7 +5,7 @@
 
 #### Get all subjects
 
-```http
+```
   GET /api/subjects
 ```
 
