@@ -18,46 +18,46 @@
 
 #### Get one subject
 
-```http
+```
   GET /api/subjects/${id}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. subject id |
+| `id`      | `int` | subject id **(Required)** |
 
 
 #### Create subject
 
-```http
+```
   POST /api/subjects
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `id`      | `string` | **Required**. subject id |
-| `title` | `string` | **Required**. subject title |
+| `id`      | `string` | subject id **(Required)** |
+| `title` | `string` | subject title **(Required)** |
 | `parent` | `int` | parent id |
 
 #### Update subject
 
-```http
+```
   PUT /api/subjects/${id}
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `id`      | `string` | **Required**. subject id |
-| `title` | `string` | **Required**. subject title |
+| `id`      | `string` | subject id **(Required)** |
+| `title` | `string` | subject title **(Required)** |
 | `parent` | `int` | parent id |
 
 #### Delete subject
 
-```http
+```
   DELETE /api/subjects/${id}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. subject id |
+| `id`      | `int` | subject id **(Required)** |
 
