@@ -1,6 +1,9 @@
 
 # YouQuiz
 
+YouQuiz is a learning platform to help students pass quizzes easily, provided by their trainers.
+
+
 ## API Documentaion
 
 #### Get all subjects
