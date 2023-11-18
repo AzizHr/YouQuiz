@@ -1,35 +1,32 @@
 package com.quiz.api.controllers;
 
-import com.quiz.api.dtos.mediaDTO.MediaDTO;
-import com.quiz.api.dtos.questionDTO.QuestionDTO;
-import com.quiz.api.services.MediaService;
-import com.quiz.api.services.QuestionService;
+import com.quiz.api.dtos.validationDTO.ValidationDTO;
+import com.quiz.api.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/medias")
-public class MediaController {
+@RequestMapping("/api/validations")
+public class ValidationController {
 
-    private final MediaService mediaService;
+    private final ValidationService validationService;
 
     @Autowired
-    public MediaController(MediaService mediaService) {
-        this.mediaService = mediaService;
+    public ValidationController(ValidationService validationService) {
+        this.validationService = validationService;
     }
 
     @PostMapping()
-    public ResponseEntity<Map<String, Object>> save(@RequestBody MediaDTO mediaDTO) throws Exception {
+    public ResponseEntity<Map<String, Object>> save(@RequestBody ValidationDTO validationDTO) throws Exception {
 
         Map<String, Object> message = new HashMap<>();
         try{
-            message.put("message", "media created");
-            message.put("media", mediaService.save(mediaDTO));
+            message.put("message", "validation created");
+            message.put("validation", validationService.save(validationDTO));
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         }catch(Exception e){
             message.put("message", e.getMessage());
@@ -39,11 +36,11 @@ public class MediaController {
     }
 
     @PutMapping
-    public  ResponseEntity<Map<String, Object>> update(@RequestBody MediaDTO mediaDTO) {
+    public  ResponseEntity<Map<String, Object>> update(@RequestBody ValidationDTO validationDTO) {
         Map<String, Object> result = new HashMap<>();
         try {
-            result.put("media", mediaService.update(mediaDTO));
-            result.put("message", "Media updated with success!");
+            result.put("validation", validationService.update(validationDTO));
+            result.put("message", "Validation updated with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -55,8 +52,8 @@ public class MediaController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            mediaService.delete(id);
-            result.put("message", "Media deleted with success!");
+            validationService.delete(id);
+            result.put("message", "Validation deleted with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -65,14 +62,14 @@ public class MediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> media(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> validation(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            if(mediaService.getMediaById(id) == null) {
-                result.put("message", "Media with id "+id+" not found!");
+            if(validationService.findById(id) == null) {
+                result.put("message", "Validation with id "+id+" not found!");
                 return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
             }
-            result.put("media", mediaService.getMediaById(id));
+            result.put("validation", validationService.findById(id));
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -81,19 +78,20 @@ public class MediaController {
     }
 
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> medias() throws Exception {
+    public ResponseEntity<Map<String, Object>> validations() throws Exception {
         Map<String, Object> message = new HashMap<>();
         try{
-            if(mediaService.findAll().isEmpty()) {
-                message.put("message", "No medias found!");
+            if(validationService.findAll().isEmpty()) {
+                message.put("message", "No validations found!");
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
-            message.put("message", "medias found");
-            message.put("medias", mediaService.findAll());
+            message.put("message", "validations found");
+            message.put("validations", validationService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any media");
+            throw new Exception("cannot find any validation");
         }
     }
+
 }
 

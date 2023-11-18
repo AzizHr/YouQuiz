@@ -1,35 +1,32 @@
 package com.quiz.api.controllers;
 
-import com.quiz.api.dtos.mediaDTO.MediaDTO;
-import com.quiz.api.dtos.questionDTO.QuestionDTO;
-import com.quiz.api.services.MediaService;
-import com.quiz.api.services.QuestionService;
+import com.quiz.api.dtos.trainerDTO.TrainerDTO;
+import com.quiz.api.services.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/medias")
-public class MediaController {
+@RequestMapping("/api/trainers")
+public class TrainerController {
 
-    private final MediaService mediaService;
+    private final TrainerService trainerService;
 
     @Autowired
-    public MediaController(MediaService mediaService) {
-        this.mediaService = mediaService;
+    public TrainerController(TrainerService trainerService) {
+        this.trainerService = trainerService;
     }
 
     @PostMapping()
-    public ResponseEntity<Map<String, Object>> save(@RequestBody MediaDTO mediaDTO) throws Exception {
+    public ResponseEntity<Map<String, Object>> save(@RequestBody TrainerDTO trainerDTO) throws Exception {
 
         Map<String, Object> message = new HashMap<>();
         try{
-            message.put("message", "media created");
-            message.put("media", mediaService.save(mediaDTO));
+            message.put("message", "trainer created");
+            message.put("trainer", trainerService.save(trainerDTO));
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         }catch(Exception e){
             message.put("message", e.getMessage());
@@ -39,11 +36,11 @@ public class MediaController {
     }
 
     @PutMapping
-    public  ResponseEntity<Map<String, Object>> update(@RequestBody MediaDTO mediaDTO) {
+    public  ResponseEntity<Map<String, Object>> update(@RequestBody TrainerDTO trainerDTO) {
         Map<String, Object> result = new HashMap<>();
         try {
-            result.put("media", mediaService.update(mediaDTO));
-            result.put("message", "Media updated with success!");
+            result.put("trainer", trainerService.update(trainerDTO));
+            result.put("message", "Trainer updated with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -55,8 +52,8 @@ public class MediaController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            mediaService.delete(id);
-            result.put("message", "Media deleted with success!");
+            trainerService.delete(id);
+            result.put("message", "Trainer deleted with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -65,14 +62,14 @@ public class MediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> media(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> trainer(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            if(mediaService.getMediaById(id) == null) {
-                result.put("message", "Media with id "+id+" not found!");
+            if(trainerService.findById(id) == null) {
+                result.put("message", "Trainer with id "+id+" not found!");
                 return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
             }
-            result.put("media", mediaService.getMediaById(id));
+            result.put("student", trainerService.findById(id));
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -81,19 +78,20 @@ public class MediaController {
     }
 
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> medias() throws Exception {
+    public ResponseEntity<Map<String, Object>> trainers() throws Exception {
         Map<String, Object> message = new HashMap<>();
         try{
-            if(mediaService.findAll().isEmpty()) {
-                message.put("message", "No medias found!");
+            if(trainerService.findAll().isEmpty()) {
+                message.put("message", "No trainers found!");
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
-            message.put("message", "medias found");
-            message.put("medias", mediaService.findAll());
+            message.put("message", "trainers found");
+            message.put("trainers", trainerService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any media");
+            throw new Exception("cannot find any trainer");
         }
     }
+
 }
 

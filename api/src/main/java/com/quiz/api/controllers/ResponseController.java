@@ -57,7 +57,7 @@ public class ResponseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getResponse(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> response(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
             if(responseService.findById(id) == null) {
