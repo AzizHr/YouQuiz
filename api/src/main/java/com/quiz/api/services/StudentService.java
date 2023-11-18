@@ -44,8 +44,8 @@ public class StudentService {
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
 
-    public List<TrainerResponseDTO> findAll() {
-        return Arrays.asList(modelMapper.map(studentRepository.findAll(), TrainerResponseDTO[].class));
+    public List<StudentResponseDTO> findAll() {
+        return Arrays.asList(modelMapper.map(studentRepository.findAll(), StudentResponseDTO[].class));
     }
 
 }
