@@ -50,10 +50,24 @@
   GET /api/subjects/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | subject id **(Required)** |
+Note that the subject id is **Required**
 
+**Result**
+
+```json
+"subject": {
+        "id": 1,
+        "title": "sub1",
+        "parent": null,
+        "children": [
+            {
+                "id": 3,
+                "title": "sub2",
+                "parentId": 1
+            }
+        ]
+    }
+```
 
 #### Create subject
 
