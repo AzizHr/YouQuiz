@@ -63,7 +63,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getQuestion(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> question(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
             if(questionService.findById(id) == null) {

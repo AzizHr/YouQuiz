@@ -58,7 +58,7 @@ public class LevelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getByID(@PathVariable Integer id) throws Exception {
+    public ResponseEntity<Map<String, Object>> level(@PathVariable Integer id) throws Exception {
 
         Map<String, Object> message = new HashMap<>();
         try{

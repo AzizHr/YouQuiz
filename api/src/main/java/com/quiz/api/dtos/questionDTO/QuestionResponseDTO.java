@@ -3,6 +3,7 @@ package com.quiz.api.dtos.questionDTO;
 import com.quiz.api.dtos.levelDTO.LevelDTO;
 import com.quiz.api.dtos.mediaDTO.MediaDTO;
 import com.quiz.api.dtos.subjectDTO.SubjectDTO;
+import com.quiz.api.dtos.subjectDTO.SubjectResponseDTO;
 import com.quiz.api.dtos.validationDTO.ValidationDTO;
 import com.quiz.api.enums.ResponseType;
 import com.quiz.api.models.Media;
@@ -20,7 +21,7 @@ public class QuestionResponseDTO {
     private ResponseType type;
     private Integer points;
     private LevelDTO level;
-    private SubjectDTO subject;
+    private SubjectResponseDTO subject;
     private List<ValidationDTO> validations;
     private List<MediaDTO> medias;
 
