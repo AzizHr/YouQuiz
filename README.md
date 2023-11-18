@@ -12,7 +12,7 @@ YouQuiz is a learning platform to help students pass quizzes easily, provided by
   GET /api/subjects
 ```
 
-**Result**
+**Response**
 ```json
     "subjects": [
         {
@@ -55,8 +55,7 @@ YouQuiz is a learning platform to help students pass quizzes easily, provided by
 
 Note that the subject id is **Required**
 
-**Result**
-
+**Response**
 ```json
 "subject": {
         "id": 1,
@@ -88,7 +87,7 @@ Note that the subject id is **Required** except the *parentID*
 }
 ```
 
-**Result**
+**Response**
 ```json
 {
     "subject": {
@@ -134,7 +133,7 @@ Note that the subject id is **Required** except the *parentID*
 }
 ```
 
-**Result**
+**Response**
 ```json
 {
     "subject": {
@@ -170,8 +169,7 @@ Note that the subject id is **Required** except the *parentID*
 ```
 Note that the subject id is **Required**
 
-**Result**
-
+**Response**
 ```
 Subject with ID ${id} has been deleted.
 ```
