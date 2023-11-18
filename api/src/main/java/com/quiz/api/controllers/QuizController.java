@@ -1,35 +1,32 @@
 package com.quiz.api.controllers;
 
-import com.quiz.api.dtos.mediaDTO.MediaDTO;
-import com.quiz.api.dtos.questionDTO.QuestionDTO;
-import com.quiz.api.services.MediaService;
-import com.quiz.api.services.QuestionService;
+import com.quiz.api.dtos.quizDTO.QuizDTO;
+import com.quiz.api.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/medias")
-public class MediaController {
+@RequestMapping("/api/quizzes")
+public class QuizController {
 
-    private final MediaService mediaService;
+    private final QuizService quizService;
 
     @Autowired
-    public MediaController(MediaService mediaService) {
-        this.mediaService = mediaService;
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
     }
 
     @PostMapping()
-    public ResponseEntity<Map<String, Object>> save(@RequestBody MediaDTO mediaDTO) throws Exception {
+    public ResponseEntity<Map<String, Object>> save(@RequestBody QuizDTO quizDTO) throws Exception {
 
         Map<String, Object> message = new HashMap<>();
         try{
-            message.put("message", "media created");
-            message.put("media", mediaService.save(mediaDTO));
+            message.put("message", "Quiz created");
+            message.put("quiz", quizService.save(quizDTO));
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         }catch(Exception e){
             message.put("message", e.getMessage());
@@ -39,11 +36,11 @@ public class MediaController {
     }
 
     @PutMapping
-    public  ResponseEntity<Map<String, Object>> update(@RequestBody MediaDTO mediaDTO) {
+    public  ResponseEntity<Map<String, Object>> update(@RequestBody QuizDTO quizDTO) {
         Map<String, Object> result = new HashMap<>();
         try {
-            result.put("media", mediaService.update(mediaDTO));
-            result.put("message", "Media updated with success!");
+            result.put("quiz", quizService.update(quizDTO));
+            result.put("message", "Quiz updated with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -55,8 +52,8 @@ public class MediaController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            mediaService.delete(id);
-            result.put("message", "Media deleted with success!");
+            quizService.delete(id);
+            result.put("message", "Quiz deleted with success!");
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -65,14 +62,14 @@ public class MediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> media(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> quiz(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<>();
         try {
-            if(mediaService.getMediaById(id) == null) {
-                result.put("message", "Media with id "+id+" not found!");
+            if(quizService.findById(id) == null) {
+                result.put("message", "Quiz with id "+id+" not found!");
                 return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
             }
-            result.put("media", mediaService.getMediaById(id));
+            result.put("quiz", quizService.findById(id));
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             result.put("message", e.getMessage());
@@ -81,19 +78,20 @@ public class MediaController {
     }
 
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> medias() throws Exception {
+    public ResponseEntity<Map<String, Object>> quizzes() throws Exception {
         Map<String, Object> message = new HashMap<>();
         try{
-            if(mediaService.findAll().isEmpty()) {
-                message.put("message", "No medias found!");
+            if(quizService.findAll().isEmpty()) {
+                message.put("message", "No quizzes found!");
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
-            message.put("message", "medias found");
-            message.put("medias", mediaService.findAll());
+            message.put("message", "quizzes found");
+            message.put("quizzes", quizService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any media");
+            throw new Exception("cannot find any quiz");
         }
     }
+
 }
 
