@@ -103,6 +103,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>api</finalName>
     </build>
 
 </project>

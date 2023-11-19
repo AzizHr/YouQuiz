@@ -61,11 +61,11 @@ public class SubjectController {
         Map<String, Object> message = new HashMap<>();
 
         try{
-            message.put("message", "subjects found");
             message.put("subject", subjectService.getSubjectByID(id));
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any subject");
+            message.put("message", "No subject found with id of "+id);
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
 
