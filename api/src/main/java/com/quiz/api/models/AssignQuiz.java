@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -25,4 +26,6 @@ public class AssignQuiz {
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
+    @OneToMany(mappedBy = "assignQuiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Answer> answers;
 }

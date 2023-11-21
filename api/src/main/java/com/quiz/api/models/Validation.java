@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
-@Table
 @NoArgsConstructor
 @Data
 public class Validation {
@@ -20,4 +21,6 @@ public class Validation {
     @ManyToOne
     @JoinColumn(name = "response_id", referencedColumnName = "id")
     private Response response;
+    @OneToMany(mappedBy = "validation", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Answer> answers;
 }
