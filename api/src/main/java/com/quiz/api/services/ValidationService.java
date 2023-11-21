@@ -42,9 +42,9 @@ public class ValidationService {
         validationRepository.deleteById(id);
     }
 
-    public TrainerResponseDTO findById(Integer id) {
+    public ValidationResponseDTO findById(Integer id) {
         Validation validation = modelMapper.map(validationRepository.findById(id).get(), Validation.class);
-        return modelMapper.map(validation, TrainerResponseDTO.class);
+        return modelMapper.map(validation, ValidationResponseDTO.class);
     }
 
     public ValidationResponseDTO update(ValidationDTO validationDTO) {
