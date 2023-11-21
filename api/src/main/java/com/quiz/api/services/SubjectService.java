@@ -6,9 +6,13 @@ import com.quiz.api.models.Subject;
 import com.quiz.api.repositories.SubjectRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectService {
@@ -45,8 +49,14 @@ public class SubjectService {
 
     }
 
-    public List<SubjectResponseDTO> findAll() {
-        return Arrays.asList(modelMapper.map(subjectRepository.findAll(), SubjectResponseDTO[].class));
+    public List<SubjectResponseDTO> findAll(int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber, pageSize);
+        Page<Subject> subjectsPage = subjectRepository.findAll(pages);
+
+        return subjectsPage
+                .stream()
+                .map(subject -> modelMapper.map(subject, SubjectResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
 

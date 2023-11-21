@@ -70,18 +70,19 @@ public class SubjectController {
     }
 
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> subjects() throws Exception {
+    public ResponseEntity<Map<String, Object>> subjects(@RequestParam int page, @RequestParam int items) throws Exception {
         Map<String, Object> message = new HashMap<>();
         try{
-            if(subjectService.findAll().isEmpty()) {
+            if(subjectService.findAll(page, items).isEmpty()) {
                 message.put("message", "No subjects found!");
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
             message.put("message", "subjects found");
-            message.put("subjects", subjectService.findAll());
+            message.put("subjects", subjectService.findAll(page, items));
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any subject");
+            message.put("message", e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }
 
@@ -99,7 +100,8 @@ public class SubjectController {
             message.put("questions", questionService.questionsByLevelId(id));
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
-            throw new Exception("cannot find any question");
+            message.put("message", e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
 
     }
