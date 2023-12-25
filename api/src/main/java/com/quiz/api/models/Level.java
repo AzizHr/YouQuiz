@@ -12,12 +12,12 @@ import java.util.List;
 public class Level {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     private String description;
     private Integer maxPoints;
     private Integer minPoints;
-    @OneToMany(mappedBy = "level")
+    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Question> questions;
 
 }

@@ -1,11 +1,6 @@
 package com.quiz.api.dtos.quizQuestionDTO;
 
-import com.quiz.api.models.Question;
-import com.quiz.api.models.Quiz;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +11,11 @@ import java.time.LocalTime;
 public class QuizQuestionDTO {
 
     private Integer id;
+    @NotNull(message = "This field is required")
     private LocalTime duration;
+    @NotNull(message = "Quiz ID is required")
     private Integer quizId;
+    @NotNull(message = "Question ID is required")
     private Integer questionId;
 
 }

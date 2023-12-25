@@ -12,9 +12,9 @@ import java.util.List;
 public class Response {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     private String content;
-    @OneToMany(mappedBy = "response", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "response", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Validation> validations;
 }

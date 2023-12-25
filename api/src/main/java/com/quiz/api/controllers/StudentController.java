@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/students")
 public class StudentController {
 
@@ -86,7 +87,7 @@ public class StudentController {
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
             message.put("message", "students found");
-            message.put("medias", studentService.findAll());
+            message.put("students", studentService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
             throw new Exception("cannot find any student");

@@ -65,8 +65,8 @@ public class SubjectServiceTest {
 
         subjects.add(subjectResponseDTO);
 
-        when(subjectService.findAll()).thenReturn(subjects);
-        List<SubjectResponseDTO> returnedSubjects = subjectService.findAll();
+        when(subjectService.findAll(0, 4)).thenReturn(subjects);
+        List<SubjectResponseDTO> returnedSubjects = subjectService.findAll(0, 4);
         assertEquals(returnedSubjects, subjects);
     }
 

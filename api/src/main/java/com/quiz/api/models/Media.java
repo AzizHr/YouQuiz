@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Media {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     @Enumerated(EnumType.STRING)
     private MediaType type;

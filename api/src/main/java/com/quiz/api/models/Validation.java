@@ -12,7 +12,7 @@ import java.util.List;
 public class Validation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     private Integer points;
     @ManyToOne
@@ -21,6 +21,6 @@ public class Validation {
     @ManyToOne
     @JoinColumn(name = "response_id", referencedColumnName = "id")
     private Response response;
-    @OneToMany(mappedBy = "validation", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "validation", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Answer> answers;
 }

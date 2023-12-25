@@ -1,5 +1,6 @@
 package com.quiz.api.services;
 
+import com.quiz.api.dtos.studentDTO.StudentResponseDTO;
 import com.quiz.api.dtos.subjectDTO.SubjectDTO;
 import com.quiz.api.dtos.subjectDTO.SubjectResponseDTO;
 import com.quiz.api.models.Subject;
@@ -28,7 +29,12 @@ public class SubjectService {
 
     public SubjectResponseDTO save(SubjectDTO subjectDTO) {
         Subject subject = modelMapper.map(subjectDTO, Subject.class);
-        subject.setParent(subjectRepository.findById(subjectDTO.getParentId()).get());
+
+        if (subjectDTO.getParentId() != null){
+            subject.setParent(subjectRepository.findById(subjectDTO.getParentId()).get());
+        }
+
+
         return modelMapper.map(subjectRepository.save(subject), SubjectResponseDTO.class);
     }
 
@@ -44,19 +50,26 @@ public class SubjectService {
     public SubjectResponseDTO update(SubjectDTO subjectDTO) {
 
         Subject subject = modelMapper.map(subjectDTO, Subject.class);
-        subject.setParent(subjectRepository.findById(subjectDTO.getParentId()).get());
-        return modelMapper.map(subjectRepository.save(subject), SubjectResponseDTO.class);
 
+        if (subjectDTO.getParentId() != null){
+            subject.setParent(subjectRepository.findById(subjectDTO.getParentId()).get());
+        }
+
+        return modelMapper.map(subjectRepository.save(subject), SubjectResponseDTO.class);
     }
 
-    public List<SubjectResponseDTO> findAll(int pageNumber, int pageSize) {
-        Pageable pages = PageRequest.of(pageNumber, pageSize);
-        Page<Subject> subjectsPage = subjectRepository.findAll(pages);
+//    public List<SubjectResponseDTO> findAll(int pageNumber, int pageSize) {
+//        Pageable pages = PageRequest.of(pageNumber, pageSize);
+//        Page<Subject> subjectsPage = subjectRepository.findAll(pages);
+//
+//        return subjectsPage
+//                .stream()
+//                .map(subject -> modelMapper.map(subject, SubjectResponseDTO.class))
+//                .collect(Collectors.toList());
+//    }
 
-        return subjectsPage
-                .stream()
-                .map(subject -> modelMapper.map(subject, SubjectResponseDTO.class))
-                .collect(Collectors.toList());
+    public List<SubjectResponseDTO> findAll() {
+        return Arrays.asList(modelMapper.map(subjectRepository.findAll(), SubjectResponseDTO[].class));
     }
 
 

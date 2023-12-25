@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/questions")
 public class QuestionController {
 
@@ -87,7 +88,7 @@ public class QuestionController {
                 return new ResponseEntity<>(message, HttpStatus.OK);
             }
             message.put("message", "subjects found");
-            message.put("subjects", questionService.findAll());
+            message.put("questions", questionService.findAll());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
             throw new Exception("cannot find any question");

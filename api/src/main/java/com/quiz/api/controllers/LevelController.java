@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/levels")
 public class LevelController {
 
@@ -63,7 +64,7 @@ public class LevelController {
         Map<String, Object> message = new HashMap<>();
         try{
             message.put("message", "level found");
-            message.put("levels", levelService.getLevelByID(id));
+            message.put("level", levelService.getLevelByID(id));
             return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
             throw new Exception("cannot find any level");
