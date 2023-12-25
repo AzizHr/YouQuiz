@@ -174,3 +174,143 @@ Note that the subject id is **Required**
 Subject with ID ${id} has been deleted.
 ```
 
+#### Get all students
+
+```
+  GET /api/students
+```
+
+**Response**
+```json
+    {
+    "students": [
+        {
+            "firstname": "Said",
+            "lastname": "Dali",
+            "birthdate": "2003-04-12",
+            "address": "This is a said address",
+            "id": 1,
+            "registeredAt": "2023-04-01",
+            "quizzes": []
+        },
+        {
+            "firstname": "Kamal",
+            "lastname": "Ahmed",
+            "birthdate": "2003-04-12",
+            "address": "This is a kamal address",
+            "id": 2,
+            "registeredAt": "2023-04-01",
+            "quizzes": []
+        }
+    ],
+    "message": "students found"
+}
+```
+
+#### Get one student
+
+```
+  GET /api/students/${id}
+```
+
+Note that the student id is **Required**
+
+**Response**
+```json
+{
+    "student": {
+        "firstname": "Said",
+        "lastname": "Dali",
+        "birthdate": "2003-04-12",
+        "address": "This is a said address",
+        "id": 1,
+        "registeredAt": "2023-04-01",
+        "quizzes": []
+    }
+}
+```
+
+#### Create student
+
+```
+  POST /api/subjects
+```
+Note that all fields are **Required**
+
+**Payload**
+```json
+{
+    "firstname": "Kamal",
+    "lastname": "Ahmed",
+    "birthdate": "2003-04-12",
+    "address": "This is a kamal address",
+    "registeredAt": "2023-04-01"
+}
+```
+
+**Response**
+```json
+{
+    "student": {
+        "firstname": "Kamal",
+        "lastname": "Ahmed",
+        "birthdate": "2003-04-12",
+        "address": "This is a kamal address",
+        "id": 2,
+        "registeredAt": "2023-04-01",
+        "quizzes": null
+    },
+    "message": "student created"
+}
+```
+
+#### Update student
+
+```
+  PUT /api/students
+```
+
+Note that all fields are **Required**
+
+**Payload**
+```json
+{
+    "id": 1,
+    "firstname": "Rachid",
+    "lastname": "Omar",
+    "birthdate": "2003-04-12",
+    "address": "This is a user address",
+    "registeredAt": "2023-04-01"
+}
+```
+
+**Response**
+```json
+{
+    "student": {
+        "firstname": "Rachid",
+        "lastname": "Omar",
+        "birthdate": "2003-04-12",
+        "address": "This is a user address",
+        "id": 1,
+        "registeredAt": "2023-04-01",
+        "quizzes": null
+    },
+    "message": "Student updated with success!"
+}
+```
+
+#### Delete student
+
+```
+  DELETE /api/subjects/${id}
+```
+Note that the student id is **Required**
+
+**Response**
+```json
+{
+    "message": "Student deleted with success!"
+}
+```
+
