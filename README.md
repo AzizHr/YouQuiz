@@ -314,3 +314,146 @@ Note that the student id is **Required**
 }
 ```
 
+
+#### Get all trainers
+
+```
+  GET /api/trainers
+```
+
+**Response**
+```json
+{
+    "trainers": [
+        {
+            "firstname": "Mohammed",
+            "lastname": "Amine",
+            "birthdate": "2003-04-12",
+            "address": "This is a mohammed address",
+            "id": 1,
+            "speciality": "speciality",
+            "quizzes": []
+        },
+        {
+            "firstname": "Marouane",
+            "lastname": "El Amine",
+            "birthdate": "2003-04-12",
+            "address": "This is a marouane address",
+            "id": 2,
+            "speciality": "speciality",
+            "quizzes": []
+        }
+    ],
+    "message": "trainers found"
+}
+```
+
+#### Get one trainer
+
+```
+  GET /api/trainers/${id}
+```
+
+Note that the trainer id is **Required**
+
+**Response**
+```json
+{
+    "student": {
+        "firstname": "Mohammed",
+        "lastname": "Amine",
+        "birthdate": "2003-04-12",
+        "address": "This is a mohammed address",
+        "id": 1,
+        "speciality": "speciality",
+        "quizzes": []
+    }
+}
+```
+
+#### Create trainer
+
+```
+  POST /api/trainers
+```
+Note that all fields are **Required**
+
+**Payload**
+```json
+{
+    "firstname": "Marouane",
+    "lastname": "El Amine",
+    "birthdate": "2003-04-12",
+    "address": "This is a marouane address",
+    "speciality": "speciality"
+}
+```
+
+**Response**
+```json
+{
+    "trainer": {
+        "firstname": "Marouane",
+        "lastname": "El Amine",
+        "birthdate": "2003-04-12",
+        "address": "This is a marouane address",
+        "id": 2,
+        "speciality": "speciality",
+        "quizzes": null
+    },
+    "message": "trainer created"
+}
+```
+
+#### Update trainer
+
+```
+  PUT /api/trainers
+```
+
+Note that all fields are **Required**
+
+**Payload**
+```json
+{
+    "id": 1,
+    "firstname": "Said",
+    "lastname": "lahlali",
+    "birthdate": "2003-04-12",
+    "address": "This is a user address",
+    "speciality": "speciality"
+}
+```
+
+**Response**
+```json
+{
+    "trainer": {
+        "firstname": "Said",
+        "lastname": "lahlali",
+        "birthdate": "2003-04-12",
+        "address": "This is a user address",
+        "id": 1,
+        "speciality": "speciality",
+        "quizzes": null
+    },
+    "message": "Trainer updated with success!"
+}
+```
+
+#### Delete trainer
+
+```
+  DELETE /api/trainers/${id}
+```
+Note that the trainer id is **Required**
+
+**Response**
+```json
+{
+    "message": "Trainer deleted with success!"
+}
+```
+
+
+
